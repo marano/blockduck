@@ -4,3 +4,6 @@
 
 (deftest shouldWinTheGameWhenThereAreNoPieceLeft
   (is won? []))
+
+(deftest shouldNotWinTheGameWhenThereArePiecesLeft
+  (is (= false (won? ["a-piece"]))))

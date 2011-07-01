@@ -1,3 +1,4 @@
 (ns blockduck.core)
 
-(defn won? [pieces] true)
+(defn won? [pieces]
+  (if (empty? pieces) true false))
