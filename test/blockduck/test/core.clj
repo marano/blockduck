@@ -7,3 +7,6 @@
 
 (deftest shouldNotWinTheGameWhenThereArePiecesLeft
   (is (= false (won? ["a-piece"]))))
+
+(deftest aNewMapShouldHaveTheFourCornersAsPossibleSpots
+  (is (= [[0 0] [0 19] [19 0] [19 19]] (spots []))))
