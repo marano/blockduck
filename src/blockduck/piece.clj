@@ -9,4 +9,4 @@
 (defn monimo-at [location]
   (let [x (:x location)
         y (:y location)]
-    {:x x :y y :corners (fn corners-for-monimo )}))
+    {:x x :y y :corners #(corners-for-monimo {:x x :y y})}))
