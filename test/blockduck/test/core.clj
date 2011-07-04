@@ -9,7 +9,7 @@
   (is (= false (won? ["a-piece"]))))
 
 (deftest aNewMapShouldHaveTheFourCornersAsPossibleSpots
-  (is (= [[0 0] [0 19] [19 0] [19 19]] (spots []))))
+  (is (= [{:x 0 :y 0} {:x 0 :y 19} {:x 19 :y 0} {:x 19 :y 19}] (spots []))))
 
 (deftest afterTheFirstPieceNextPiecesShouldTouchOtherPieces
-  (is (= [[0 0] [2 0] [0 2] [2 2]] (spots [[[1 1]]]))))
+  (is (= [{:x 0 :y 0} {:x 2 :y 0} {:x 0 :y 2} {:x 2 :y 2}] (spots [{:x 1 :y 1}]))))

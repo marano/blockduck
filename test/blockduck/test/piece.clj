@@ -3,4 +3,4 @@
   (:use [clojure.test]))
 
 (deftest shouldTellCornersForAMonimo 
-  (is (= [[0 0] [2 0] [0 2] [2 2]] (corners-for-monimo [1 1]))))
+  (is (= [{:x 0 :y 0} {:x 2 :y 0} {:x 0 :y 2} {:x 2 :y 2}] (corners-for-monimo {:x 1 :y 1}))))

@@ -5,4 +5,6 @@
   (if (empty? player-remaining-pieces) true false))
 
 (defn spots [placed-pieces] 
-  (if (empty? placed-pieces) [[0 0] [0 19] [19 0] [19 19]] (corners-for-monimo (get (get placed-pieces 0) 0))))
+  (if (empty? placed-pieces)
+    [{:x 0 :y 0} {:x 0 :y 19} {:x 19 :y 0} {:x 19 :y 19}]
+    (corners-for-monimo (first placed-pieces))))

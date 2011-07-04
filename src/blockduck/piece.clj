@@ -1,4 +1,7 @@
 (ns blockduck.piece)
 
 (defn corners-for-monimo [location]
-  [[(- (get location 0) 1) (- (get location 1) 1)] [(+ (get location 0) 1) (- (get location 1) 1)] [(- (get location 0) 1) (+ (get location 1) 1)] [(+ (get location 0) 1) (+ (get location 1) 1)]])
+  [{:x (- (:x location) 1) :y (- (:y location) 1)}
+   {:x (+ (:x location) 1) :y (- (:y location) 1)}
+   {:x (- (:x location) 1) :y (+ (:y location) 1)}
+   {:x (+ (:x location) 1) :y (+ (:y location) 1)}])
