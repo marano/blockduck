@@ -7,7 +7,8 @@
    {:x (+ (:x location) 1) :y (+ (:y location) 1)}])
 
 (defn corners-blocked-by-monimo [location]
-  [{:x (:x location) :y (- (:y location) 1)}
+  [location
+   {:x (:x location) :y (- (:y location) 1)}
    {:x (:x location) :y (+ (:y location) 1)}
    {:x (- (:x location) 1) :y (:y location)}
    {:x (+ (:x location) 1) :y (:y location)}])
