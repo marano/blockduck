@@ -1,21 +1,21 @@
 (ns blockduck.test.piece
   (:use [blockduck.piece])
-  (:use [clojure.test]))
+  (:use [midje.sweet]))
 
-(deftest shouldTellCornersForAMonomino 
-  (is (= [{:x 0 :y 0} {:x 2 :y 0} {:x 0 :y 2} {:x 2 :y 2}] (corners-for-monomino {:x 1 :y 1}))))
+(fact "tells corners for a monomino"
+  (corners-for-monomino {:x 1 :y 1}) => [{:x 0 :y 0} {:x 2 :y 0} {:x 0 :y 2} {:x 2 :y 2}])
 
-(deftest shouldTellCornersForADomino
-  (is (= [{:x 0 :y 0} {:x 2 :y 0} {:x 0 :y 2} {:x 2 :y 2} {:x 0 :y 1} {:x 2 :y 1} {:x 0 :y 3} {:x 2 :y 3}] (corners-for-piece {:x 1 :y 1} [{:x 1 :y 2}]))))
+(fact "tells corners for a domino"
+  (corners-for-piece {:x 1 :y 1} [{:x 1 :y 2}]) => [{:x 0 :y 0} {:x 2 :y 0} {:x 0 :y 2} {:x 2 :y 2} {:x 0 :y 1} {:x 2 :y 1} {:x 0 :y 3} {:x 2 :y 3}])
 
-(deftest shouldTellCornersForATriominoAndNotDuplicateOverlapingCorners
-  (is (= [{:x 0 :y 0} {:x 2 :y 0} {:x 0 :y 2} {:x 2 :y 2} {:x 0 :y 1} {:x 2 :y 1} {:x 0 :y 3} {:x 2 :y 3} {:x 0 :y 4} {:x 2 :y 4}] (corners-for-piece {:x 1 :y 1} [{:x 1 :y 2} {:x 1 :y 3}]))))
+(fact "tells corners for a triomino and not duplicate overlaping corners"
+  (corners-for-piece {:x 1 :y 1} [{:x 1 :y 2} {:x 1 :y 3}]) => [{:x 0 :y 0} {:x 2 :y 0} {:x 0 :y 2} {:x 2 :y 2} {:x 0 :y 1} {:x 2 :y 1} {:x 0 :y 3} {:x 2 :y 3} {:x 0 :y 4} {:x 2 :y 4}])
 
-(deftest shouldTellCornersBlockedByAMonomino
-  (is (= [{:x 1 :y 1} {:x 1 :y 0} {:x 1 :y 2} {:x 0 :y 1} {:x 2 :y 1}] (corners-blocked-by-monomino {:x 1 :y 1}))))
+(fact "tells corners blocked by a monomino"
+  (corners-blocked-by-monomino {:x 1 :y 1}) => [{:x 1 :y 1} {:x 1 :y 0} {:x 1 :y 2} {:x 0 :y 1} {:x 2 :y 1}])
 
-(deftest shouldTellCornersBlockedByADominoAndNotDuplicateOverlapingCorners
-  (is (= [{:x 1 :y 1} {:x 1 :y 0} {:x 1 :y 2} {:x 0 :y 1} {:x 2 :y 1} {:x 1 :y 3} {:x 0 :y 2} {:x 2 :y 2}] (corners-blocked-by-domino {:x 1 :y 1} [{:x 1 :y 2}]))))
+(fact "tells corners blocked by a domino and not duplicate overlaping corners"
+  (corners-blocked-by-domino {:x 1 :y 1} [{:x 1 :y 2}]) => [{:x 1 :y 1} {:x 1 :y 0} {:x 1 :y 2} {:x 0 :y 1} {:x 2 :y 1} {:x 1 :y 3} {:x 0 :y 2} {:x 2 :y 2}])
 
-(deftest shouldTellAvailableCornersForADomino
-  (is (= [{:x 0 :y 0} {:x 2 :y 0} {:x 0 :y 3} {:x 2 :y 3}] (available-corners-for-domino {:x 1 :y 1} [{:x 1 :y 2}]))))
+(fact "tells available corners for a domino"
+  (available-corners-for-domino {:x 1 :y 1} [{:x 1 :y 2}]) => [{:x 0 :y 0} {:x 2 :y 0} {:x 0 :y 3} {:x 2 :y 3}])

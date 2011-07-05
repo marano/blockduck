@@ -1,16 +1,16 @@
 (ns blockduck.test.core
   (:use [blockduck.core])
   (:use [blockduck.piece])
-  (:use [clojure.test]))
+  (:use [midje.sweet]))
 
-(deftest shouldWinTheGameWhenThereAreNoPieceLeft
-  (is won? []))
+(fact "wins the game when there are no piece left"
+  (won? []) => true)
 
-(deftest shouldNotWinTheGameWhenThereArePiecesLeft
-  (is (= false (won? ["a-piece"]))))
+(fact "doesnt win the game when there are pieces left"
+  (won? ["a-piece"]) => false)
 
-(deftest aNewMapShouldHaveTheFourCornersAsPossibleSpots
-  (is (= [{:x 0 :y 0} {:x 0 :y 19} {:x 19 :y 0} {:x 19 :y 19}] (spots []))))
+(fact "a new map should have the four corners as possible spots"
+  (spots []) => [{:x 0 :y 0} {:x 0 :y 19} {:x 19 :y 0} {:x 19 :y 19}])
 
-(deftest afterTheFirstPieceNextPiecesShouldTouchOtherPieces
-  (is (= [{:x 0 :y 0} {:x 2 :y 0} {:x 0 :y 2} {:x 2 :y 2}] (spots [(monomino-at {:x 1 :y 1})]))))
+(fact "after the first piece next pieces should touch other pieces"
+  (spots [(monomino-at {:x 1 :y 1})]) => [{:x 0 :y 0} {:x 2 :y 0} {:x 0 :y 2} {:x 2 :y 2}])
