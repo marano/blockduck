@@ -20,10 +20,14 @@
   (concat (corners-for-monimo central-piece)
           (mapcat corners-for-monimo other-pieces)))
 
-;(defn corners-for-domino [central-piece other-pieces]
-;  (let possible-corners
-;    (concat [(corners-for-monimo central-piece)]
-;            (mapcat corners-for-monimo other-pieces))))
+(defn corners-for-domino [central-piece other-pieces]
+  (let [impossible-spots (impossible-corners-for-domino central-piece other-pieces)]
+    (filter
+      (complement
+        (fn [possible-monimo]
+          (some (fn [impossible-monimo]
+                  (= possible-monimo impossible-monimo)) impossible-spots)))
+      (possible-corners-for-domino central-piece other-pieces))))
 
 (defn monimo-at [location]
   (let [x (:x location)
