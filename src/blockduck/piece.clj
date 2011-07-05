@@ -6,10 +6,16 @@
    {:x (- (:x location) 1) :y (+ (:y location) 1)}
    {:x (+ (:x location) 1) :y (+ (:y location) 1)}])
 
+(defn impossible-corners-for-monimo [location]
+  [{:x (:x location) :y (- (:y location) 1)}
+   {:x (:x location) :y (+ (:y location) 1)}
+   {:x (- (:x location) 1) :y (:y location)}
+   {:x (+ (:x location) 1) :y (:y location)}])
+  
+
 (defn possible-corners-for-domino [central-piece other-pieces]
   (concat (corners-for-monimo central-piece)
           (mapcat corners-for-monimo other-pieces)))
-
 
 ;(defn corners-for-domino [central-piece other-pieces]
 ;  (let possible-corners
