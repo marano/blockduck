@@ -24,10 +24,9 @@
 (defn available-corners-for-domino [central-piece other-pieces]
   (let [blocked-spots (corners-blocked-by-domino central-piece other-pieces)]
     (filter
-      (complement
-        (fn [possible-monomino]
-          (some (fn [impossible-monomino]
-                  (= possible-monomino impossible-monomino)) blocked-spots)))
+      (complement (fn [possible-monomino]
+                    (some (fn [impossible-monomino]
+                            (= possible-monomino impossible-monomino)) blocked-spots)))
       (corners-for-domino central-piece other-pieces))))
 
 (defn monomino-at [location]
