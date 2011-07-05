@@ -17,7 +17,7 @@
   (concat (corners-blocked-by-monomino central-piece)
           (mapcat corners-blocked-by-monomino other-pieces)))
 
-(defn corners-for-domino [central-piece other-pieces]
+(defn corners-for-piece [central-piece other-pieces]
   (let [corners-for-all-pieces (concat (corners-for-monomino central-piece)
                                        (mapcat corners-for-monomino other-pieces))]
     (distinct corners-for-all-pieces)))
@@ -28,7 +28,7 @@
       (complement (fn [possible-monomino]
                     (some (fn [impossible-monomino]
                             (= possible-monomino impossible-monomino)) blocked-spots)))
-      (corners-for-domino central-piece other-pieces))))
+      (corners-for-piece central-piece other-pieces))))
 
 (defn monomino-at [location]
   (let [x (:x location)
