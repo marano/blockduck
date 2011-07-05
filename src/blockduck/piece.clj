@@ -14,8 +14,8 @@
    {:x (+ (:x location) 1) :y (:y location)}])
 
 (defn corners-blocked-by-domino [central-piece other-pieces]
-  (concat (corners-blocked-by-monomino central-piece)
-          (mapcat corners-blocked-by-monomino other-pieces)))
+  (distinct (concat (corners-blocked-by-monomino central-piece)
+                    (mapcat corners-blocked-by-monomino other-pieces))))
 
 (defn corners-for-piece [central-piece other-pieces]
   (let [corners-for-all-pieces (concat (corners-for-monomino central-piece)
