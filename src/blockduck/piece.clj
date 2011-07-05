@@ -11,7 +11,10 @@
    {:x (:x location) :y (+ (:y location) 1)}
    {:x (- (:x location) 1) :y (:y location)}
    {:x (+ (:x location) 1) :y (:y location)}])
-  
+
+(defn impossible-corners-for-domino [central-piece other-pieces]
+  (concat (impossible-corners-for-monimo central-piece)
+          (mapcat impossible-corners-for-monimo other-pieces)))
 
 (defn possible-corners-for-domino [central-piece other-pieces]
   (concat (corners-for-monimo central-piece)
