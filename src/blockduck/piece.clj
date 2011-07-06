@@ -13,7 +13,7 @@
    {:x (- (:x location) 1) :y (:y location)}
    {:x (+ (:x location) 1) :y (:y location)}])
 
-(defn spots-blocked-by-domino [central-piece other-pieces]
+(defn spots-blocked-by-piece [central-piece other-pieces]
   (distinct (concat (spots-blocked-by-monomino central-piece)
                     (mapcat spots-blocked-by-monomino other-pieces))))
 
@@ -23,7 +23,7 @@
     (distinct corners-for-all-pieces)))
 
 (defn available-corners-for-piece [central-piece other-pieces]
-  (let [blocked-spots (spots-blocked-by-domino central-piece other-pieces)]
+  (let [blocked-spots (spots-blocked-by-piece central-piece other-pieces)]
     (filter
       (complement (fn [possible-monomino]
                     (some (fn [impossible-monomino]
