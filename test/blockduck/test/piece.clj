@@ -18,4 +18,7 @@
   (spots-blocked-by-domino {:x 1 :y 1} [{:x 1 :y 2}]) => [{:x 1 :y 1} {:x 1 :y 0} {:x 1 :y 2} {:x 0 :y 1} {:x 2 :y 1} {:x 1 :y 3} {:x 0 :y 2} {:x 2 :y 2}])
 
 (fact "tells available corners for a domino"
-  (available-corners-for-domino {:x 1 :y 1} [{:x 1 :y 2}]) => [{:x 0 :y 0} {:x 2 :y 0} {:x 0 :y 3} {:x 2 :y 3}])
+  (available-corners-for-piece {:x 1 :y 1} [{:x 1 :y 2}]) => [{:x 0 :y 0} {:x 2 :y 0} {:x 0 :y 3} {:x 2 :y 3}])
+
+(fact "tells available corners for a triomino"
+  (available-corners-for-piece {:x 1 :y 1} [{:x 2 :y 1} {:x 1 :y 2}]) => [{:x 0 :y 0} {:x 3 :y 0} {:x 3 :y 2} {:x 0 :y 3} {:x 2 :y 3}])

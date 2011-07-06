@@ -22,7 +22,7 @@
                                        (mapcat corners-for-monomino other-pieces))]
     (distinct corners-for-all-pieces)))
 
-(defn available-corners-for-domino [central-piece other-pieces]
+(defn available-corners-for-piece [central-piece other-pieces]
   (let [blocked-spots (spots-blocked-by-domino central-piece other-pieces)]
     (filter
       (complement (fn [possible-monomino]
