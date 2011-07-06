@@ -13,13 +13,18 @@
    {:x (- (:x location) 1) :y (:y location)}
    {:x (+ (:x location) 1) :y (:y location)}])
 
+(defn absolute-location [reference-location relative-location]
+  {:x (+ (:x reference-location) (:x relative-location)) :y (+ (:y reference-location) (:y relative-location))})
+
+(defn absolute-locations [reference-location relative-locations]
+  (map (fn [relative-location] (absolute-location reference-location relative-location)) relative-locations))
+
 (defn spots-blocked-by-piece [central-piece other-pieces]
   (distinct (concat (spots-blocked-by-monomino central-piece)
-                    (mapcat spots-blocked-by-monomino other-pieces))))
+                    (mapcat spots-blocked-by-monomino (absolute-locations central-piece other-pieces)))))
 
 (defn corners-for-piece [central-piece other-pieces]
-  (let [corners-for-all-pieces (concat (corners-for-monomino central-piece)
-                                       (mapcat corners-for-monomino other-pieces))]
+  (let [corners-for-all-pieces (concat (corners-for-monomino central-piece) (mapcat corners-for-monomino (absolute-locations central-piece other-pieces)))]
     (distinct corners-for-all-pieces)))
 
 (defn available-corners-for-piece [central-piece other-pieces]
@@ -34,6 +39,3 @@
   (let [x (:x location)
         y (:y location)]
     {:x x :y y :corners #(corners-for-monomino {:x x :y y})}))
-
-(defn absolute-location [reference-location relative-location]
-  {:x (+ (:x reference-location) (:x relative-location)) :y (+ (:y reference-location) (:y relative-location))})
