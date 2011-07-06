@@ -6,16 +6,16 @@
    {:x (- (:x location) 1) :y (+ (:y location) 1)}
    {:x (+ (:x location) 1) :y (+ (:y location) 1)}])
 
-(defn corners-blocked-by-monomino [location]
+(defn spots-blocked-by-monomino [location]
   [location
    {:x (:x location) :y (- (:y location) 1)}
    {:x (:x location) :y (+ (:y location) 1)}
    {:x (- (:x location) 1) :y (:y location)}
    {:x (+ (:x location) 1) :y (:y location)}])
 
-(defn corners-blocked-by-domino [central-piece other-pieces]
-  (distinct (concat (corners-blocked-by-monomino central-piece)
-                    (mapcat corners-blocked-by-monomino other-pieces))))
+(defn spots-blocked-by-domino [central-piece other-pieces]
+  (distinct (concat (spots-blocked-by-monomino central-piece)
+                    (mapcat spots-blocked-by-monomino other-pieces))))
 
 (defn corners-for-piece [central-piece other-pieces]
   (let [corners-for-all-pieces (concat (corners-for-monomino central-piece)
@@ -23,7 +23,7 @@
     (distinct corners-for-all-pieces)))
 
 (defn available-corners-for-domino [central-piece other-pieces]
-  (let [blocked-spots (corners-blocked-by-domino central-piece other-pieces)]
+  (let [blocked-spots (spots-blocked-by-domino central-piece other-pieces)]
     (filter
       (complement (fn [possible-monomino]
                     (some (fn [impossible-monomino]
