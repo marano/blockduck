@@ -34,3 +34,6 @@
   (let [x (:x location)
         y (:y location)]
     {:x x :y y :corners #(corners-for-monomino {:x x :y y})}))
+
+(defn absolute-location [reference-location relative-location]
+  {:x (+ (:x reference-location) (:x relative-location)) :y (+ (:y reference-location) (:y relative-location))})
