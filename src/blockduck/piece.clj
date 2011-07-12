@@ -35,6 +35,16 @@
                             (= possible-monomino impossible-monomino)) blocked-spots)))
       (corners-for-piece central-piece other-pieces))))
 
+(defn relative-rotate-monomino [monomino times]
+  (let [current-x (:x monomino)
+        current-y (:y monomino)
+        new-x (if (= times 1) current-y (if (= times 2) (* -1 current-x) (* -1 current-y)))
+        new-y (if (= times 1) (* -1 current-x) (if (= times 2) (* -1 current-y) current-x))]
+    {:x new-x :y new-y}))
+
+(defn relative-rotate-pieces [other-pieces times]
+  (map (fn [piece] (relative-rotate-monomino piece times)) other-pieces))
+
 (defn monomino-at [location]
   (let [x (:x location)
         y (:y location)]

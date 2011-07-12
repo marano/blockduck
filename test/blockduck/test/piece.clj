@@ -31,3 +31,11 @@
 
 (fact "tells the absolute location of a list of relative locations"
   (absolute-locations {:x 1 :y 1} [{:x 0 :y 1}]) => [{:x 1 :y 2}])
+
+(fact "tells the new spot for a relative rotated piece"
+  (relative-rotate-monomino {:x -1 :y 2} 1) => {:x 2 :y 1}
+  (relative-rotate-monomino {:x -1 :y 2} 2) => {:x 1 :y -2}
+  (relative-rotate-monomino {:x -1 :y 2} 3) => {:x -2 :y -1})
+
+(fact "tells new spots for rotated piece"
+  (relative-rotate-pieces [{:x 1 :y 1} {:x 0 :y 1}] 1) => [{:x 1 :y -1} {:x 1 :y 0}])
