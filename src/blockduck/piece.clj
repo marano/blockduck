@@ -45,6 +45,16 @@
 (defn relative-rotate-pieces [other-pieces times]
   (map (fn [piece] (relative-rotate-monomino piece times)) other-pieces))
 
+(defn relative-flip-monomino [monomino]
+  (let [current-x (:x monomino)
+        current-y (:y monomino)
+        new-x (* -1 current-x)
+        new-y current-y]
+    {:x new-x :y new-y}))
+
+(defn relative-flip-pieces [other-pieces]
+  (map relative-flip-monomino other-pieces))
+
 (defn monomino-at [location]
   (let [x (:x location)
         y (:y location)]
