@@ -19,6 +19,18 @@
 (defn points-on-the-board [reference-point relative-points]
   (map #(board-point reference-point %) relative-points))
 
+(defn flip-point [relative-point]
+  (xy (* -1 (:x relative-point)) (:y relative-point)))
+
+(defn rotate-point-90 [relative-point]
+  (xy (:y relative-point) (* -1 (:x relative-point)))) 
+
+(defn rotate-point-180 [relative-point]
+  (xy (* -1 (:x relative-point)) (* -1 (:y relative-point))))
+
+(defn rotate-point-270 [relative-point]
+  (xy (* -1 (:y relative-point)) (:x relative-point)))
+
 (defn point-corners [a-point]
   (let [x (:x a-point)
         y (:y a-point)

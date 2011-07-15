@@ -20,3 +20,11 @@
 
 (fact "tells points blocked by a point"
   (points-blocked-by-point (xy 1 1)) => (xys 1 1, 1 0, 1 2, 0 1, 2 1))
+
+(fact "flips point"
+  (flip-point (xy -1 1)) => (xy 1 1))
+
+(fact "ratates point"
+  (rotate-point-90 (xy -1 2)) => (xy 2 1)
+  (rotate-point-180 (xy -1 2)) => (xy 1 -2)
+  (rotate-point-270 (xy -1 2)) => (xy -2 -1))
