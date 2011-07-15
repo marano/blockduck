@@ -19,12 +19,13 @@ def notify(result)
     while !found_result && !crashed do
       begin
         messages << result.readline
+        if messages.last =~ /FAILURE: (\d) fact was not confirmed. [(]But (\d) were.[)]/
+          found_result = true
+          break
+        end
       rescue EOFError
         crashed = true
         break;
-      end
-      if messages.last =~ /FAILURE: (\d) fact was not confirmed. [(]But (\d) were.[)]/
-        found_result = true
       end
     end
     if crashed
