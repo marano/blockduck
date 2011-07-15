@@ -13,7 +13,7 @@
 (fact "tells points on the board for a list of relative points based on a reference point"
   (let [reference-point (xy 1 1)
         relative-points (xys 0 0, 0 1)]
-    (board-points reference-point relative-points) => (xys 1 1, 1 2)))
+    (points-on-the-board reference-point relative-points) => (xys 1 1, 1 2)))
 
 (fact "tells corners for point"
   (point-corners (xy 1 1)) => (xys 0 0, 2 0, 0 2, 2 2))

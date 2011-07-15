@@ -7,7 +7,7 @@
   (let [reference-point (xy 1 1)
         blocks (xys 0 0, 0 1)
         piece (piece reference-point blocks)]
-    (piece-board-points piece) => (xys 1 1, 1 2)))
+    (piece-points-on-the-board piece) => (xys 1 1, 1 2)))
 
 (fact "tells corners for a given piece"
   (let [a-piece (piece (xy 1 1) (xys 0 0, 0 1, 0 2))]

@@ -16,7 +16,7 @@
         y (+ (:y reference-point) (:y relative-point))]
     (xy x y)))
 
-(defn board-points [reference-point relative-points]
+(defn points-on-the-board [reference-point relative-points]
   (map #(board-point reference-point %) relative-points))
 
 (defn point-corners [a-point]
