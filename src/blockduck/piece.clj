@@ -12,4 +12,4 @@
   (distinct (mapcat point-corners (piece-board-points piece))))
 
 (defn points-blocked-by-piece [piece]
-  (mapcat points-blocked-by-point (piece-board-points piece)))
+  (distinct (mapcat points-blocked-by-point (piece-board-points piece))))
