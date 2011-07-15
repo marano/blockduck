@@ -14,7 +14,7 @@ watch( '^test.*/.*\.clj') { |m| run_all_tests }
 def notify(result)
   messages = []
   messages[0] = result.readline
-  if (messages[0] =~ /All claimed facts [(]\d[)] have been confirmed./)
+  if (messages[0] =~ /All claimed facts [(]\d+[)] have been confirmed./)
     system("notify-send -t 3000 -i gtk-add Uau! \"Test is passing \o/\"")
   else
     found_result = false
@@ -22,7 +22,7 @@ def notify(result)
     while !found_result && !crashed do
       begin
         messages << result.readline
-        if messages.last =~ /FAILURE: (\d) fact was not confirmed. [(]But (\d) were.[)]/
+        if messages.last =~ /FAILURE: (\d+) fact was not confirmed. [(]But (\d+) were.[)]/
           found_result = true
           break
         end
