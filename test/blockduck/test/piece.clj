@@ -9,9 +9,9 @@
         piece (piece reference-point blocks)]
     (piece-board-points piece) => (xys 1 1, 1 2)))
 
-(fact "tells points touched by a triomino and do not duplicate overlaping points"
+(fact "tells corners for a triomino without overlaping corners"
   (let [a-piece (piece (xy 1 1) (xys 0 0, 0 1, 0 2))]
-    (points-touched-by-piece a-piece) => (xys 0 0, 2 0, 0 2, 2 2, 0 1, 2 1, 0 3, 2 3, 0 4, 2 4)))
+    (piece-corners a-piece) => (xys 0 0, 2 0, 0 2, 2 2, 0 1, 2 1, 0 3, 2 3, 0 4, 2 4)))
 
 (fact "tells points blocked by piece"
   (let [a-piece (piece (xy 1 1) (xys 0 0))]

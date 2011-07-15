@@ -19,13 +19,17 @@
 (defn board-points [reference-point relative-points]
   (map #(board-point reference-point %) relative-points))
 
-(defn points-touched-by-point [a-point]
+(defn point-corners [a-point]
   (let [x (:x a-point)
-        y (:y a-point)]
-    (xys (- x 1) (- y 1)
-         (+ x 1) (- y 1)
-         (- x 1) (+ y 1)
-         (+ x 1) (+ y 1))))
+        y (:y a-point)
+        bottom-left-corner (xy (- x 1) (- y 1))
+        bottom-right-corner (xy (+ x 1) (- y 1))
+        top-left-corner (xy (- x 1) (+ y 1))
+        top-right-corner (xy (+ x 1) (+ y 1))]
+    [bottom-left-corner
+     bottom-right-corner
+     top-left-corner
+     top-right-corner]))
 
 (defn points-blocked-by-point [a-point]
   (let [x (:x a-point)
