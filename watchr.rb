@@ -38,7 +38,7 @@ def notify(result)
       end
       system("notify-send -t 6000 -i gtk-remove \"OMG!!!!!!!!\" \"Something is fucked up!\n<o>\n#{cause}\"")
     elsif found_result
-      system("notify-send -t 4000 -i gtk-remove \"Oh nooo\" \"Only #{$1} fact#{$1.to_i > 1 ? "s" : ""} of #{$1.to_i + $2.to_i} were confirmed\"")
+      system("notify-send -t 4000 -i gtk-remove \"Oh nooo\" \"#{$1} fact#{$1.to_i > 1 ? "s" : ""} of #{$1.to_i + $2.to_i} #{$1.to_i > 1 ? "have" : "has"} not been confirmed\"")
     end
   end
   puts
