@@ -1,5 +1,8 @@
 def run_all_tests
   cmd = "cake midje"
+  puts
+  puts
+  puts
   puts(cmd)
   result = IO.popen(cmd)
   notify(result)
@@ -12,7 +15,7 @@ def notify(result)
   messages = []
   messages[0] = result.readline
   if (messages[0] =~ /All claimed facts [(]\d[)] have been confirmed./)
-    system("notify-send -t 4000 -i gtk-add Uau! \"Test is passing\"")
+    system("notify-send -t 3000 -i gtk-add Uau! \"Test is passing \o/\"")
   else
     found_result = false
     crashed = false
@@ -29,7 +32,11 @@ def notify(result)
       end
     end
     if crashed
-      system("notify-send -t 4000 -i gtk-remove \"OMG!!!!!!!!\" \"Something is fucked up!\"")
+      cause = nil
+      messages.each do |m|
+        cause = m if cause.nil? && m =~ /Caused by/
+      end
+      system("notify-send -t 6000 -i gtk-remove \"OMG!!!!!!!!\" \"Something is fucked up!\n<o>\n#{cause}\"")
     elsif found_result
       system("notify-send -t 4000 -i gtk-remove \"Oh nooo\" \"Only #{$1} fact#{$1.to_i > 1 ? "s" : ""} of #{$1.to_i + $2.to_i} were confirmed\"")
     end
