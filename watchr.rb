@@ -15,13 +15,23 @@ def notify(result)
     system("notify-send -t 4000 -i gtk-add Uau! \"Test is passing\"")
   else
     found_result = false
-    while !found_result do
-      messages << result.readline
+    crashed = false
+    while !found_result && !crashed do
+      begin
+        messages << result.readline
+      rescue EOFError
+        crashed = true
+        break;
+      end
       if messages.last =~ /FAILURE: (\d) fact was not confirmed. [(]But (\d) were.[)]/
         found_result = true
       end
     end
-    system("notify-send -t 4000 -i gtk-remove \"Oh nooo\" \"Only #{$1} fact#{$1.to_i > 1 ? "s" : ""} of #{$1.to_i + $2.to_i} were confirmed\"")
+    if crashed
+      system("notify-send -t 4000 -i gtk-remove \"OMG!!!!!!!!\" \"Something is fucked up!\"")
+    elsif found_result
+      system("notify-send -t 4000 -i gtk-remove \"Oh nooo\" \"Only #{$1} fact#{$1.to_i > 1 ? "s" : ""} of #{$1.to_i + $2.to_i} were confirmed\"")
+    end
   end
   puts
   puts
