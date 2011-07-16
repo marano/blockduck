@@ -8,7 +8,7 @@
 (fact "tells the point on the board for a relative point based on a reference point"
   (let [reference-point (xy 1 1)
         relative-point (xy 0 1)]
-    (board-point reference-point relative-point) => (xy 1 2)))
+    (point-on-the-board reference-point relative-point) => (xy 1 2)))
 
 (fact "tells points on the board for a list of relative points based on a reference point"
   (let [reference-point (xy 1 1)

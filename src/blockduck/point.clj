@@ -11,13 +11,13 @@
 
 (def xys points)
 
-(defn board-point [reference-point relative-point]
+(defn point-on-the-board [reference-point relative-point]
   (let [x (+ (:x reference-point) (:x relative-point))
         y (+ (:y reference-point) (:y relative-point))]
     (xy x y)))
 
 (defn points-on-the-board [reference-point relative-points]
-  (map #(board-point reference-point %) relative-points))
+  (map #(point-on-the-board reference-point %) relative-points))
 
 (defn flip-point [relative-point]
   (xy (* -1 (:x relative-point)) (:y relative-point)))
