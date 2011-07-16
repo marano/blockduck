@@ -3,7 +3,7 @@
   (:use [blockduck.point])
   (:use [midje.sweet]))
 
-(fact "tells piece board points"
+(fact "tells piece points on the board"
   (let [reference-point (xy 1 1)
         blocks (xys 0 0, 0 1)
         piece (piece reference-point blocks)]
