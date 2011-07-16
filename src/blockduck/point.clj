@@ -19,35 +19,29 @@
 (defn points-on-the-board [reference-point relative-points]
   (map #(point-on-the-board reference-point %) relative-points))
 
-(defn flip-point [relative-point]
-  (xy (* -1 (:x relative-point)) (:y relative-point)))
+(defn- switch-xy [a-point] (xy       (:y a-point)       (:x a-point)))
+(defn- invert-x  [a-point] (xy (* -1 (:x a-point))      (:y a-point)))
+(defn- invert-y  [a-point] (xy       (:x a-point) (* -1 (:y a-point))))
 
-(defn rotate-point-90 [relative-point]
-  (xy (:y relative-point) (* -1 (:x relative-point)))) 
+(defn flip-point       [relative-point] (invert-x   relative-point))
+(defn rotate-point-90  [relative-point] (switch-xy (invert-x relative-point)))
+(defn rotate-point-180 [relative-point] (invert-x  (invert-y relative-point)))
+(defn rotate-point-270 [relative-point] (switch-xy (invert-y relative-point)))
 
-(defn rotate-point-180 [relative-point]
-  (xy (* -1 (:x relative-point)) (* -1 (:y relative-point))))
-
-(defn rotate-point-270 [relative-point]
-  (xy (* -1 (:y relative-point)) (:x relative-point)))
+(defn- top    [a-point] (xy    (:x a-point)    (+ (:y a-point) 1)))
+(defn- bottom [a-point] (xy    (:x a-point)    (- (:y a-point) 1)))
+(defn- right  [a-point] (xy (+ (:x a-point) 1)    (:y a-point)))
+(defn- left   [a-point] (xy (- (:x a-point) 1)    (:y a-point)))
 
 (defn point-corners [a-point]
-  (let [x (:x a-point)
-        y (:y a-point)
-        bottom-left-corner (xy (- x 1) (- y 1))
-        bottom-right-corner (xy (+ x 1) (- y 1))
-        top-left-corner (xy (- x 1) (+ y 1))
-        top-right-corner (xy (+ x 1) (+ y 1))]
-    [bottom-left-corner
-     bottom-right-corner
-     top-left-corner
-     top-right-corner]))
+  [(bottom (left  a-point))
+   (bottom (right a-point))
+   (top    (left  a-point))
+   (top    (right a-point))])
 
 (defn points-blocked-by-point [a-point]
-  (let [x (:x a-point)
-        y (:y a-point)]
-    (xys x y
-         x (- y 1)
-         x (+ y 1)
-         (- x 1) y
-         (+ x 1) y)))
+  [        a-point
+   (bottom a-point)
+   (top    a-point)
+   (left   a-point)
+   (right  a-point)])
