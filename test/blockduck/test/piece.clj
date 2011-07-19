@@ -4,7 +4,7 @@
   (:use [midje.sweet]))
 
 (fact "tells left outer join"
-      (left-outer-join [1 2 3 4] [3 4]) => [1 2])
+      (diff [1 2 3 4] [3 4]) => [1 2])
 
 (fact "tells piece points on the board"
       (let [reference-point (xy 1 1)
