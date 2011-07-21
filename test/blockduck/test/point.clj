@@ -16,10 +16,13 @@
         (points-on-the-board reference-point relative-points) => (xys 1 1, 1 2)))
 
 (fact "tells corners for point"
-      (point-corners (xy 1 1)) => (xys 0 0, 2 0, 0 2, 2 2))
+      (point-corners (xy 1 1)) => (xys 0 0, 2 0, 0 2, 2 2)
+      (point-corners (xy 0 0)) => (xys 1 1)
+      (point-corners (xy 19 19)) => (xys 18 18))
 
 (fact "tells points blocked by a point"
-      (points-blocked-by-point (xy 1 1)) => (xys 1 1, 1 0, 1 2, 0 1, 2 1))
+      (points-blocked-by-point (xy 1 1)) => (xys 1 1, 1 0, 1 2, 0 1, 2 1)
+      (points-blocked-by-point (xy 0 0)) => (xys 0 0, 0 1, 1 0))
 
 (fact "flips point"
       (flip-point (xy -1 1)) => (xy 1 1))

@@ -33,15 +33,23 @@
 (defn- right  [a-point] (xy (+ (:x a-point) 1)    (:y a-point)))
 (defn- left   [a-point] (xy (- (:x a-point) 1)    (:y a-point)))
 
+(defn- is-inside-the-board [point]
+  (and (>= (:x point)  0)
+       (>= (:y point)  0)
+       (<  (:x point) 20)
+       (<  (:y point) 20)))
+
 (defn point-corners [a-point]
-  [(bottom (left  a-point))
-   (bottom (right a-point))
-   (top    (left  a-point))
-   (top    (right a-point))])
+  (filter is-inside-the-board
+          [(bottom (left  a-point))
+           (bottom (right a-point))
+           (top    (left  a-point))
+           (top    (right a-point))]))
 
 (defn points-blocked-by-point [a-point]
-  [        a-point
-   (bottom a-point)
-   (top    a-point)
-   (left   a-point)
-   (right  a-point)])
+  (filter is-inside-the-board
+          [        a-point
+           (bottom a-point)
+           (top    a-point)
+           (left   a-point)
+           (right  a-point)]))
