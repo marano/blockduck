@@ -22,13 +22,9 @@ def notify(result)
     while !found_result && !crashed do
       begin
         messages << result.readline
-        if messages.last =~ /FAILURE: (\d+) fact was not confirmed. [(]But (\d+) were.[)]/
-          found_result = true
-          break
-        end
+        found_result = messages.last =~ /FAILURE: (\d+) (fact|facts) (was|were) not confirmed. [(]But (\d+) were.[)]/
       rescue EOFError
         crashed = true
-        break;
       end
     end
     if crashed
@@ -38,7 +34,10 @@ def notify(result)
       end
       system("notify-send -t 6000 -i gtk-remove \"OMG!!!!!!!!\" \"Something is fucked up!\n<o>\n#{cause}\"")
     elsif found_result
-      system("notify-send -t 4000 -i gtk-remove \"Oh nooo\" \"#{$1} fact#{$1.to_i > 1 ? "s" : ""} of #{$1.to_i + $2.to_i} #{$1.to_i > 1 ? "have" : "has"} not been confirmed\"")
+      unconfirmed = $1.to_i 
+      confirmed = $4.to_i 
+      total = unconfirmed + confirmed
+      system("notify-send -t 4000 -i gtk-remove \"Oh nooo\" \"#{unconfirmed} fact#{unconfirmed > 1 ? "s" : ""} of #{total} #{unconfirmed > 1 ? "have" : "has"} not been confirmed\"")
     end
   end
   puts
