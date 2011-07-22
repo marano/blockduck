@@ -1,13 +1,12 @@
 (ns blockduck.board
   (:use [blockduck.collection])
   (:use [blockduck.point])
-  (:use [blockduck.piece]))
+  (:use [blockduck.piece])
+  (:use [blockduck.player]))
 
-(defrecord Board [pieces])
+(defrecord Board [players])
 
-(defn board [pieces] (Board. pieces))
+(defn board [players] (Board. players))
 
-(defn board-corners [board]
-  (diff
-    (mapcat piece-corners (:pieces board))
-    (mapcat points-blocked-by-piece (:pieces board))))
+(defn board-corners-for-player [a-board a-player]
+  (diff (player-corners a-player) (points-blocked-by-player a-player)))
