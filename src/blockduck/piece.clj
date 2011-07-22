@@ -10,7 +10,9 @@
   (points-on-the-board (:reference-point piece) (:blocks piece)))
 
 (defn points-blocked-by-piece [piece]
-  (distinct (mapcat points-blocked-by-point (piece-points-on-the-board piece))))
+  (let [piece-points (piece-points-on-the-board piece)
+        blocked-points (distinct (mapcat points-blocked-by-point piece-points))]
+    (diff blocked-points piece-points)))
 
 (defn piece-corners [a-piece]
       (let [blocked-points (points-blocked-by-piece a-piece)
