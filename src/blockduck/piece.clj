@@ -1,4 +1,5 @@
 (ns blockduck.piece
+  (:use [blockduck.collection])
   (:use [blockduck.point]))
 
 (defrecord Piece [reference-point blocks])
@@ -10,8 +11,6 @@
 
 (defn points-blocked-by-piece [piece]
   (distinct (mapcat points-blocked-by-point (piece-points-on-the-board piece))))
-
-(defn diff [group-1 group-2] (remove #(some #{%} group-2) group-1))
 
 (defn piece-corners [a-piece]
       (let [blocked-points (points-blocked-by-piece a-piece)

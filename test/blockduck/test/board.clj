@@ -5,4 +5,5 @@
   (:use [midje.sweet]))
 
 (fact "tells available corners the board"
-      (board-corners (board [(piece (xy 0 0) (xys 0 0))])) => [(xy 1 1)])
+      (board-corners (board [(piece (xy 0 0) (xys 0 0))])) => [(xy 1 1)]
+      (board-corners (board [(piece (xy 0 0) (xys 0 0)) (piece (xy 0 1) (xys 0 0))])) => [(xy 1 2)])

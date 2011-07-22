@@ -1,4 +1,5 @@
 (ns blockduck.board
+  (:use [blockduck.collection])
   (:use [blockduck.point])
   (:use [blockduck.piece]))
 
@@ -7,4 +8,6 @@
 (defn board [pieces] (Board. pieces))
 
 (defn board-corners [board]
-  (mapcat piece-corners (:pieces board)))
+  (diff
+    (mapcat piece-corners (:pieces board))
+    (mapcat points-blocked-by-piece (:pieces board))))
